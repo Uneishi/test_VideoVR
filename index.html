@@ -1,0 +1,89 @@
+<html class="a-html">
+	<head>
+  		<meta charset="utf-8">
+    	<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+		<script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+    	<script src="https://unpkg.com/aframe-layout-component@3.x.x/dist/aframe-layout-component.min.js"></script>
+    	<script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+		<script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+		<script src="components/set-image.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+		<script src="https://rawgithub.com/ngokevin/kframe/master/components/reverse-look-controls/dist/aframe-reverse-look-controls-component.min.js"></script>
+		<script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+		<script src="https://unpkg.com/aframe-event-set-component@^3.0.0/dist/aframe-event-set-component.min.js"></script> 
+  </head>
+	<body>
+    	<a-scene>
+			<a-assets>
+
+				<img id="intro" crossorigin="anonymous" src="images/intro.png">	
+				<img id="hall" crossorigin="anonymous" src="images/hall.jpg">
+				<img id="bar" crossorigin="anonymous" src="images/bar.jpg">
+				<img id="restau" crossorigin="anonymous" src="images/restau.jpg">
+				<img id="reunion" crossorigin="anonymous" src="images/reunion.jpg">
+				<img id="room" crossorigin="anonymous" src="images/room.jpg">
+				<img id="bed" crossorigin="anonymous" src="images/bed.png">
+				<img id="desk" crossorigin="anonymous" src="images/desk.png">
+				<img id="fork" crossorigin="anonymous" src="images/fork.png">
+				<img id="glass" crossorigin="anonymous" src="images/glass.png">
+				<img id="people" crossorigin="anonymous" src="images/people.png">
+				<img id="logo" crossorigin="anonymous" src="images/logo_campanile.png">
+				<img id="play" crossorigin="anonymous" src="images/play-button.png">
+				<img id="pause" crossorigin="anonymous" src="images/pause-button.png">
+				<img id="mute" crossorigin="anonymous" src="images/mute.png">
+				<img id="unmute" crossorigin="anonymous" src="images/unmute.png">
+
+				<script id="plane" type="text/nunjucks">
+					<a-image class="link"
+    	   				height: "1"; width: "1"
+      					material="shader: flat; src: {{thumb}}"
+	  					event-set__1="_event: mousedown; scale: 1 1 1"
+      					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+      					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+      					event-set__4="_event: mouseleave; scale: 1 1 1"
+	  					set-image="on: click; target: #image-360; src: {{src }}"
+	  					update-raycaster="#cursor"
+      				></a-image>
+  				</script>  
+			</a-assets>
+
+			<a-sky id="image-360" src="#intro" data-set-image-fade-setup="true" animation_fade rotation="0 270 0"></a-sky>
+
+			<a-entity id="links" layout="layout: line; margin: 1.2" position="4 0 -1.8" rotation="0 -90 0" >
+				<a-entity template="src: #plane" data-thumb="#bed" data-src="#room"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#desk" data-src="#hall"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#fork" data-src="#restau"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#glass" data-src="#bar"></a-entity>
+				<a-entity template="src: #plane" data-thumb="#people" data-src="#reunion"></a-entity>
+			</a-entity>
+
+			<a-image src="#logo" position="0 -2 0" rotation="90 0 180" ></a-image>
+
+  			<!-- Camera + Cursor. -->
+  			<a-entity camera mouse-cursor reverse-look-controls position="" rotation="" scale="" visible="">
+			<a-image src="#play" position="-14 -4 -9"></a-image>
+			<a-image src="#unmute" position="-14 -6 -9"></a-image>
+			</a-entity>
+		</a-scene>
+
+		<script type="text/javascript" src="components/please-wait.min.js"></script>
+		<script type="text/javascript">
+			window.loading_screen = window.pleaseWait(
+			{
+			  logo: "images/logo-slip.png",
+			  backgroundColor: '#ffffff',
+			  loadingHtml: 'Bienvenue'
+			});
+			document.querySelector('a-scene').addEventListener('loaded', function ()
+			{
+			  setTimeout(function()
+			{
+				window.loading_screen.finish();
+			}, 4000);
+			});
+		</script>
+		<script src="components/app.js"></script>
+		<script type="text/javascript" src="components/bootstrap.min.js"></script>
+
+	</body>
+</html>

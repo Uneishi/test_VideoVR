@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/0.5.0/aframe.js"></script>
+		<script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+	</head>
+    <body>
+          <a-scene>
+			 <a-assets>
+				<img id="video-play-image" src="img/play-button.png">
+				<img id="video-pause-image" src="img/pause-button.png">
+				<img id="mute-image" src="img/mute.png">
+				<img id="unmute-image" src="img/unmute.png">
+				<video muted id="video" loop="true" src="videos/gorillaz.mp4"></video>
+            </a-assets>
+			<a-videosphere src="#video"></a-videosphere>
+			<a-image id="play_button" src="#video-pause-image" position="0 2 -5"></a-image>
+			<a-image id="mute_button" src="#mute-image" position="0 0 -5"></a-image>
+			<a-entity camera mouse-cursor look-controls position="0 2 2"></a-entity>
+        </a-scene>
+		<script src="script.js"></script>
+	</body>
+</html>
